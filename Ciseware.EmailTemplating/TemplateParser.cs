@@ -16,6 +16,12 @@ namespace Ciseware.EmailTemplating
             _regExToken = new Regex(_regExString, RegexOptions.IgnoreCase);
         }
 
+        /// <summary>
+        /// Replaces tokens in the template text with the values from the supplied dictionary
+        /// </summary>
+        /// <param name="templateText">The template text</param>
+        /// <param name="tokenValues">Dictionary mapping token names to values</param>
+        /// <returns>Text with tokens replaced with their corresponding values from the dictionary</returns>
         public string ReplaceTokens(string templateText, IDictionary<string, string> tokenValues)
         {
             var output = _regExToken.Replace(templateText, (match) =>

@@ -22,9 +22,9 @@ namespace Ciseware.EmailTemplating
         /// <summary>
         /// Create a merged mail message with the supplied subject and body templates
         /// </summary>
-        /// <param name="subjectTemplate"></param>
-        /// <param name="bodyTemplate"></param>
-        /// <param name="tokenValues"></param>
+        /// <param name="subjectTemplate">Message subject</param>
+        /// <param name="bodyTemplate">Message body</param>
+        /// <param name="tokenValues">Dictionary mapping token names to values</param>
         /// <returns></returns>
         public MailMessage Create(string subjectTemplate, string bodyTemplate, IDictionary<string, string> tokenValues)
         {
@@ -42,9 +42,9 @@ namespace Ciseware.EmailTemplating
         /// <summary>
         /// Create a merged mail message with the supplied subject template and the message template read from the given path
         /// </summary>
-        /// <param name="subject"></param>
-        /// <param name="bodyTemplatePath"></param>
-        /// <param name="tokenValues"></param>
+        /// <param name="subject">Message subject</param>
+        /// <param name="bodyTemplatePath">Path to a file containing the message body</param>
+        /// <param name="tokenValues">Dictionary mapping token names to values</param>
         /// <returns></returns>
         public MailMessage CreateFromFile(string subject, string bodyTemplatePath, IDictionary<string, string>  tokenValues)
         {
