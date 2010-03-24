@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailTests.cs" />
+    <Compile Include="IntegrationTests.cs" />
     <Compile Include="TemplateParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
