@@ -10,34 +10,27 @@ namespace Ciseware.EmailTemplating
     {
         protected string _regExString = @"\{\%\=\s*(?<TokenName>\w*)\s*\%\}";
         protected Regex _regExToken;
-        protected string _templateText;        
 
-        public TemplateParser(string templateText)
+        public TemplateParser()
         {
-            this._templateText = templateText;          
             _regExToken = new Regex(_regExString, RegexOptions.IgnoreCase);
         }
 
-        public string ReplaceTokens(object values)
+        public string ReplaceTokens(string templateText, IDictionary<string, string> tokenValues)
         {
-            var objectType = values.GetType();
-            var properties = objectType.GetProperties();
-
-            var output = _regExToken.Replace(_templateText, (match) =>
+            var output = _regExToken.Replace(templateText, (match) =>
                                                           {
                                                               var tokenName = match.Groups["TokenName"].Value.ToLower();
-                                                              var property = properties.FirstOrDefault(x=>x.Name.ToLower() == tokenName && x.CanRead);
-
-                                                              if (property == null)
+                                                              try
                                                               {
-                                                                  throw new ArgumentException(
-                                                                      "No value supplied for token: " + tokenName +
-                                                                      ". Check the property exists and is readable.");
+                                                                  var property = tokenValues.First(x=>x.Key.ToLower() == tokenName);
+                                                                  return property.Value;
                                                               }
-                                                              
-                                                              return property.GetValue(values, null).ToString();
+                                                              catch (Exception)
+                                                              {
+                                                                  throw new ArgumentException("No value supplied for token: " + tokenName);
+                                                              }                                                             
                                                           });
-
             return output;
         }
     }
