@@ -47,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EmailTemplating\EmailTemplating.csproj">
-      <Project>{1D8374D9-92A0-4887-A3C5-F40820BE0150}</Project>
-      <Name>EmailTemplating</Name>
+    <ProjectReference Include="..\Ciseware.EmailTemplating\Ciseware.EmailTemplating.csproj">
+      <Project>{B98744F5-26A0-479B-9501-9DD8A2D1E540}</Project>
+      <Name>Ciseware.EmailTemplating</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ciseware.EmailTemplating;
 using NUnit.Framework;
 
-namespace EmailTemplating.Tests
+namespace Ciseware.EmailTemplating.Tests
 {
     [TestFixture]
     public class TemplateParserTests
     {
         [Test]
-        public void  CanReplaceToken()
+        public void CanReplaceToken()
         {
             var inputText = "My name is {%=name%}";
-            
-            var values = new {
-                                 Name = "Bill Gates"
-                             };
+
+            var values = new
+            {
+                Name = "Bill Gates"
+            };
 
             var parser = new TemplateParser(inputText);
             var outputText = parser.ReplaceTokens(values);
@@ -25,14 +27,15 @@ namespace EmailTemplating.Tests
         }
 
         [Test]
-        public void  CanReplaceMultipleTokens()
+        public void CanReplaceMultipleTokens()
         {
             var inputText = "My first name is {%=firstname%}. My second name is {%=secondname%}.";
-            
-            var values = new {
-                                 FirstName = "Bill",
-                                 SecondName = "Gates"
-                             };
+
+            var values = new
+            {
+                FirstName = "Bill",
+                SecondName = "Gates"
+            };
 
             var parser = new TemplateParser(inputText);
             var outputText = parser.ReplaceTokens(values);
@@ -40,15 +43,16 @@ namespace EmailTemplating.Tests
             Assert.That(outputText, Is.EqualTo("My first name is Bill. My second name is Gates."));
         }
 
-        
+
         [Test]
-        public void  CanReplaceManyOfSameToken()
+        public void CanReplaceManyOfSameToken()
         {
             var inputText = "My first name is {%=firstname%}. Let me repeat that: {%=firstname%}.";
-            
-            var values = new {
-                                 FirstName = "Bill"
-                             };
+
+            var values = new
+            {
+                FirstName = "Bill"
+            };
 
             var parser = new TemplateParser(inputText);
             var outputText = parser.ReplaceTokens(values);
@@ -57,14 +61,15 @@ namespace EmailTemplating.Tests
         }
 
         [Test]
-        public void  CanSupplyExtraneousProperties()
+        public void CanSupplyExtraneousProperties()
         {
             var inputText = "My name is {%=name%}";
-            
-            var values = new {
-                                 Name = "Bill Gates",
-                                 Age = 50
-                             };
+
+            var values = new
+            {
+                Name = "Bill Gates",
+                Age = 50
+            };
 
             var parser = new TemplateParser(inputText);
             var outputText = parser.ReplaceTokens(values);
@@ -74,13 +79,14 @@ namespace EmailTemplating.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void  ExceptionThrownIfValueNotSuppliedForToken()
+        public void ExceptionThrownIfValueNotSuppliedForToken()
         {
             var inputText = "My name is {%=name%}";
-            
-            var values = new {
-                                 SomethingElse = "Bill Gates"
-                             };
+
+            var values = new
+            {
+                SomethingElse = "Bill Gates"
+            };
 
             var parser = new TemplateParser(inputText);
             var outputText = parser.ReplaceTokens(values);
@@ -88,11 +94,11 @@ namespace EmailTemplating.Tests
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void  ArgumentExceptionThrownIfValueNotReadableProperty()
+        public void ArgumentExceptionThrownIfValueNotReadableProperty()
         {
             var inputText = "My name is {%=name%}";
-            
-            var values = new ClassWithWriteOnlyProperty{Name = "Bill Gates"};
+
+            var values = new ClassWithWriteOnlyProperty { Name = "Bill Gates" };
 
             var parser = new TemplateParser(inputText);
             var outputText = parser.ReplaceTokens(values);
