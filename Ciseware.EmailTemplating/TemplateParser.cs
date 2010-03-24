@@ -6,7 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace Ciseware.EmailTemplating
 {
-    public class TemplateParser
+    /// <summary>
+    /// Template parser which uses JQuery Templating style tokens such as {%=FirstName%}
+    /// Tokens are case-insensitive
+    /// </summary>
+    public class TemplateParser : ITemplateParser
     {
         protected string _regExString = @"\{\%\=\s*(?<TokenName>\w*)\s*\%\}";
         protected Regex _regExToken;

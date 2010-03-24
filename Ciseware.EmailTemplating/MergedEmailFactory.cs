@@ -12,9 +12,9 @@ namespace Ciseware.EmailTemplating
     /// </summary>
     public class MergedEmailFactory
     {
-        private TemplateParser _templateParser;
+        private ITemplateParser _templateParser;
 
-        public MergedEmailFactory(TemplateParser templateParser)
+        public MergedEmailFactory(ITemplateParser templateParser)
         {
             _templateParser = templateParser;
         }
