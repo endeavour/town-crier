@@ -8,12 +8,12 @@ namespace Ciseware.EmailTemplating
 {
     public class MailMessageWrapper
     {
-        internal MailMessage ContainedMailMessage;
-        internal string HtmlBody;
-        internal bool IsSubjectSet;
-        internal string PlainTextBody;
-        internal ITemplateParser TemplateParser;
-        internal IDictionary<string, string> TokenValues;
+        protected internal MailMessage ContainedMailMessage;
+        protected internal string HtmlBody;
+        protected internal bool IsSubjectSet;
+        protected internal string PlainTextBody;
+        protected internal ITemplateParser TemplateParser;
+        protected internal IDictionary<string, string> TokenValues;
 
         public MailMessageWrapper(ITemplateParser templateParser)
         {
@@ -83,13 +83,13 @@ namespace Ciseware.EmailTemplating
             return ContainedMailMessage;
         }
 
-        private void SetBodyFromPlainText()
+        protected void SetBodyFromPlainText()
         {
             ContainedMailMessage.Body = PlainTextBody;
             ContainedMailMessage.IsBodyHtml = false;
         }
 
-        private void SetBodyFromHtmlText()
+        protected void SetBodyFromHtmlText()
         {
             ContainedMailMessage.Body = HtmlBody;
             ContainedMailMessage.IsBodyHtml = true;

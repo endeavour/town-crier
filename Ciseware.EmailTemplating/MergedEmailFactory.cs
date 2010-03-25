@@ -9,7 +9,7 @@ namespace Ciseware.EmailTemplating
     /// </summary>
     public class MergedEmailFactory
     {
-        private MailMessageWrapper _message;
+        protected MailMessageWrapper _message;
 
         public MergedEmailFactory(ITemplateParser templateParser)
         {
