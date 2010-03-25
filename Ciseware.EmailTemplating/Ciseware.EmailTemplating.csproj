@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ITemplateParser.cs" />
     <Compile Include="MergedEmailFactory.cs" />
+    <Compile Include="MessageSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateParser.cs" />
   </ItemGroup>
