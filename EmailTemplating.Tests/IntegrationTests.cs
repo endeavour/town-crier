@@ -29,7 +29,6 @@ namespace Ciseware.EmailTemplating.Tests
             Console.WriteLine("Email pick up location: " + _smtpClient.PickupDirectoryLocation);
         }
 
-
         [Test]
         public void CanSendHtmlEmail()
         {
@@ -39,13 +38,56 @@ namespace Ciseware.EmailTemplating.Tests
             {{"name", "James"},
             {"userid", "123"}};
 
-            var message = factory.CreateFromFile("Hello {%=name%}", @"templates\sample-email.html", tokenValues);
+            var message = factory.WithTokenValues(tokenValues).WithHtmlBodyFromFile(@"templates\sample-email.html").Create();
 
             var from = new MailAddress("robot@test.com", "Automated Emailer");
             var to = new MailAddress("joe@bloggs.com", "Joe Bloggs");
             message.From = from;
             message.To.Add(to);
-            message.IsBodyHtml = true;
+
+            _smtpClient.Send(message);   
+        
+            // Would be nice to read in the output file here and check it is correct but - somewhat annoyingly - there isn't a nice
+            // way to retrieve the filename of the saved file without using reflection: http://www.codeproject.com/KB/IP/smtpclientext.aspx
+        }
+
+        [Test]
+        public void CanSendPlainEmail()
+        {
+            var factory =new MergedEmailFactory(new TemplateParser());
+
+            var tokenValues = new Dictionary<string,string>()
+            {{"name", "James"},
+            {"userid", "123"}};
+
+            var message = factory.WithTokenValues(tokenValues).WithPlainTextBodyFromFile(@"templates\sample-email.txt").Create();
+
+            var from = new MailAddress("robot@test.com", "Automated Emailer");
+            var to = new MailAddress("joe@bloggs.com", "Joe Bloggs");
+            message.From = from;
+            message.To.Add(to);
+
+            _smtpClient.Send(message);   
+        
+            // Would be nice to read in the output file here and check it is correct but - somewhat annoyingly - there isn't a nice
+            // way to retrieve the filename of the saved file without using reflection: http://www.codeproject.com/KB/IP/smtpclientext.aspx
+        }
+
+        [Test]
+        public void CanSendHtmlEmailWithPlainAlternative()
+        {
+            var factory =new MergedEmailFactory(new TemplateParser());
+
+            var tokenValues = new Dictionary<string,string>()
+            {{"name", "James"},
+            {"userid", "123"}};
+
+            var message = factory.WithTokenValues(tokenValues).WithHtmlBodyFromFile(@"templates\sample-email.html").WithPlainTextBodyFromFile(@"templates\sample-email.txt").Create();
+
+            var from = new MailAddress("robot@test.com", "Automated Emailer");
+            var to = new MailAddress("joe@bloggs.com", "Joe Bloggs");
+            message.From = from;
+            message.To.Add(to);
 
             _smtpClient.Send(message);   
         
