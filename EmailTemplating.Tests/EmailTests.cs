@@ -7,7 +7,7 @@ using System.Text;
 using Ciseware.EmailTemplating;
 using NUnit.Framework;
 
-namespace EmailTemplating.Tests
+namespace Ciseware.EmailTemplating.Tests
 {
     [TestFixture]
     public class EmailTests

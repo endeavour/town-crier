@@ -8,7 +8,7 @@
     <ProjectGuid>{5CA1C99F-5742-453D-B2AC-5C42C34DE214}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EmailTemplating.Tests</RootNamespace>
+    <RootNamespace>Ciseware.EmailTemplating.Tests</RootNamespace>
     <AssemblyName>EmailTemplating.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
