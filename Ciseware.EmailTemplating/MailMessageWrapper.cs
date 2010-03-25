@@ -11,7 +11,6 @@ namespace Ciseware.EmailTemplating
         internal string PlainTextBody;
         internal ITemplateParser TemplateParser;
         internal IDictionary<string, string> TokenValues;
-        private IDictionary<string, string> _tokenValues;
 
         public MailMessageWrapper(ITemplateParser templateParser)
         {
