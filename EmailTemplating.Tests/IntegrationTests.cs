@@ -38,7 +38,10 @@ namespace Ciseware.EmailTemplating.Tests
             {{"name", "James"},
             {"userid", "123"}};
 
-            var message = factory.WithTokenValues(tokenValues).WithHtmlBodyFromFile(@"templates\sample-email.html").Create();
+            var message = factory
+                .WithTokenValues(tokenValues)
+                .WithHtmlBodyFromFile(@"templates\sample-email.html")
+                .Create();
 
             var from = new MailAddress("robot@test.com", "Automated Emailer");
             var to = new MailAddress("joe@bloggs.com", "Joe Bloggs");
@@ -60,7 +63,10 @@ namespace Ciseware.EmailTemplating.Tests
             {{"name", "James"},
             {"userid", "123"}};
 
-            var message = factory.WithTokenValues(tokenValues).WithPlainTextBodyFromFile(@"templates\sample-email.txt").Create();
+            var message = factory
+                .WithTokenValues(tokenValues)
+                .WithPlainTextBodyFromFile(@"templates\sample-email.txt")
+                .Create();
 
             var from = new MailAddress("robot@test.com", "Automated Emailer");
             var to = new MailAddress("joe@bloggs.com", "Joe Bloggs");
@@ -82,10 +88,15 @@ namespace Ciseware.EmailTemplating.Tests
             {{"name", "James"},
             {"userid", "123"}};
 
-            var message = factory.WithTokenValues(tokenValues).WithHtmlBodyFromFile(@"templates\sample-email.html").WithPlainTextBodyFromFile(@"templates\sample-email.txt").Create();
+            var message = factory
+                .WithTokenValues(tokenValues)
+                .WithSubject("Test Subject")
+                .WithHtmlBodyFromFile(@"templates\sample-email.html")
+                .WithPlainTextBodyFromFile(@"templates\sample-email.txt")
+                .Create();
 
-            var from = new MailAddress("robot@test.com", "Automated Emailer");
-            var to = new MailAddress("joe@bloggs.com", "Joe Bloggs");
+            var from = new MailAddress("james@ciseware.com", "Automated Emailer");
+            var to = new MailAddress("james@ciseware.com", "Joe Bloggs");
             message.From = from;
             message.To.Add(to);
 
