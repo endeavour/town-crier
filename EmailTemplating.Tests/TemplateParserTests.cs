@@ -24,6 +24,19 @@ namespace Ciseware.EmailTemplating.Tests
         }
 
         [Test]
+        public void WhiteSpaceIgnoredWhenReplacingToken()
+        {
+            var inputText = "My name is {%=     name   %}";
+
+            var values = new Dictionary<string, string>(){{"Name", "Bill Gates"}};
+
+            var parser = new TemplateParser();
+            var outputText = parser.ReplaceTokens(inputText, values);
+
+            Assert.That(outputText, Is.EqualTo("My name is Bill Gates"));
+        }
+
+        [Test]
         public void CanReplaceMultipleTokens()
         {
             var inputText = "My first name is {%=firstname%}. My second name is {%=secondname%}.";
