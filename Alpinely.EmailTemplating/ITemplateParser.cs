@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Ciseware.EmailTemplating
+namespace Alpinely.EmailTemplating
 {
     public interface ITemplateParser
     {

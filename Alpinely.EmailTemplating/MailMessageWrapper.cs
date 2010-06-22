@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace Ciseware.EmailTemplating
+namespace Alpinely.EmailTemplating
 {
     public class MailMessageWrapper
     {
@@ -69,7 +69,8 @@ namespace Ciseware.EmailTemplating
             if (HtmlBody != null && PlainTextBody != null)
             {
                 SetBodyFromPlainText();
-                AlternateView htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null, MediaTypeNames.Text.Html);
+                AlternateView htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null,
+                                                                                            MediaTypeNames.Text.Html);
                 ContainedMailMessage.AlternateViews.Add(htmlAlternative);
             }
             else

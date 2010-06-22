@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Ciseware.EmailTemplating
+namespace Alpinely.EmailTemplating
 {
     /// <summary>
     /// Factory class for creating "mail-merged" MailMessage objects
@@ -17,7 +15,7 @@ namespace Ciseware.EmailTemplating
         }
 
         public MailMessageWrapper WithTokenValues(IDictionary<string, string> tokenValues)
-        {            
+        {
             _message.TokenValues = tokenValues;
             return _message;
         }

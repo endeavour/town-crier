@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ciseware.EmailTemplating.Tests", "EmailTemplating.Tests\Ciseware.EmailTemplating.Tests.csproj", "{5CA1C99F-5742-453D-B2AC-5C42C34DE214}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpinely.EmailTemplating", "Alpinely.EmailTemplating\Alpinely.EmailTemplating.csproj", "{B98744F5-26A0-479B-9501-9DD8A2D1E540}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ciseware.EmailTemplating", "Ciseware.EmailTemplating\Ciseware.EmailTemplating.csproj", "{B98744F5-26A0-479B-9501-9DD8A2D1E540}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpinely.EmailTemplating.Tests", "Alpinely.EmailTemplating.Tests\Alpinely.EmailTemplating.Tests.csproj", "{5CA1C99F-5742-453D-B2AC-5C42C34DE214}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,16 +15,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|x86.ActiveCfg = Release|Any CPU
 		{B98744F5-26A0-479B-9501-9DD8A2D1E540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B98744F5-26A0-479B-9501-9DD8A2D1E540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B98744F5-26A0-479B-9501-9DD8A2D1E540}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -35,6 +25,16 @@ Global
 		{B98744F5-26A0-479B-9501-9DD8A2D1E540}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B98744F5-26A0-479B-9501-9DD8A2D1E540}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B98744F5-26A0-479B-9501-9DD8A2D1E540}.Release|x86.ActiveCfg = Release|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5CA1C99F-5742-453D-B2AC-5C42C34DE214}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
