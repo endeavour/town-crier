@@ -12,7 +12,7 @@ namespace Alpinely.EmailTemplating
         protected internal string HtmlBody;
         protected internal bool IsSubjectSet;
         protected internal string PlainTextBody;
-        protected internal ITemplateParser TemplateParser;
+        protected internal readonly ITemplateParser TemplateParser;
         protected internal IDictionary<string, string> TokenValues;
 
         public MailMessageWrapper(ITemplateParser templateParser)
