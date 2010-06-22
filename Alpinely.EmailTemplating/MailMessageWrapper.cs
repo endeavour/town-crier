@@ -26,8 +26,8 @@ namespace Alpinely.EmailTemplating
             if (IsSubjectSet)
                 throw new InvalidOperationException("Subject has already been set");
 
-            string _populatedSubject = TemplateParser.ReplaceTokens(subjectTemplate, TokenValues);
-            ContainedMailMessage.Subject = _populatedSubject;
+            var populatedSubject = TemplateParser.ReplaceTokens(subjectTemplate, TokenValues);
+            ContainedMailMessage.Subject = populatedSubject;
             IsSubjectSet = true;
             return this;
         }
@@ -37,9 +37,9 @@ namespace Alpinely.EmailTemplating
             if (HtmlBody != null)
                 throw new InvalidOperationException("An HTML body already exists");
 
-            string _populatedBody = TemplateParser.ReplaceTokens(bodyTemplate, TokenValues);
+            string populatedBody = TemplateParser.ReplaceTokens(bodyTemplate, TokenValues);
 
-            HtmlBody = _populatedBody;
+            HtmlBody = populatedBody;
             return this;
         }
 
@@ -48,9 +48,9 @@ namespace Alpinely.EmailTemplating
             if (PlainTextBody != null)
                 throw new InvalidOperationException("A plaintext body already exists");
 
-            string _populatedBody = TemplateParser.ReplaceTokens(bodyTemplate, TokenValues);
+            string populatedBody = TemplateParser.ReplaceTokens(bodyTemplate, TokenValues);
 
-            PlainTextBody = _populatedBody;
+            PlainTextBody = populatedBody;
             return this;
         }
 
@@ -69,7 +69,7 @@ namespace Alpinely.EmailTemplating
             if (HtmlBody != null && PlainTextBody != null)
             {
                 SetBodyFromPlainText();
-                AlternateView htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null,
+                var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null,
                                                                                             MediaTypeNames.Text.Html);
                 ContainedMailMessage.AlternateViews.Add(htmlAlternative);
             }

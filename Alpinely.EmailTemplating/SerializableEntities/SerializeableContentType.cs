@@ -6,11 +6,11 @@ namespace Alpinely.EmailTemplating.SerializableEntities
     [Serializable]
     internal class SerializeableContentType
     {
-        private String Boundary;
-        private String CharSet;
-        private String MediaType;
-        private String Name;
-        private SerializeableCollection Parameters;
+        private String _boundary;
+        private String _charSet;
+        private String _mediaType;
+        private String _name;
+        private SerializeableCollection _parameters;
 
         internal static SerializeableContentType GetSerializeableContentType(ContentType ct)
         {
@@ -19,11 +19,11 @@ namespace Alpinely.EmailTemplating.SerializableEntities
 
             var sct = new SerializeableContentType();
 
-            sct.Boundary = ct.Boundary;
-            sct.CharSet = ct.CharSet;
-            sct.MediaType = ct.MediaType;
-            sct.Name = ct.Name;
-            sct.Parameters = SerializeableCollection.GetSerializeableCollection(ct.Parameters);
+            sct._boundary = ct.Boundary;
+            sct._charSet = ct.CharSet;
+            sct._mediaType = ct.MediaType;
+            sct._name = ct.Name;
+            sct._parameters = SerializeableCollection.GetSerializeableCollection(ct.Parameters);
 
             return sct;
         }
@@ -32,12 +32,12 @@ namespace Alpinely.EmailTemplating.SerializableEntities
         {
             var sct = new ContentType();
 
-            sct.Boundary = Boundary;
-            sct.CharSet = CharSet;
-            sct.MediaType = MediaType;
-            sct.Name = Name;
+            sct.Boundary = _boundary;
+            sct.CharSet = _charSet;
+            sct.MediaType = _mediaType;
+            sct.Name = _name;
 
-            Parameters.SetColletion(sct.Parameters);
+            _parameters.SetColletion(sct.Parameters);
 
             return sct;
         }

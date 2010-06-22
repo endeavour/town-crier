@@ -7,17 +7,17 @@ namespace Alpinely.EmailTemplating
     /// </summary>
     public class MergedEmailFactory
     {
-        protected MailMessageWrapper _message;
+        protected MailMessageWrapper Message;
 
         public MergedEmailFactory(ITemplateParser templateParser)
         {
-            _message = new MailMessageWrapper(templateParser);
+            Message = new MailMessageWrapper(templateParser);
         }
 
         public MailMessageWrapper WithTokenValues(IDictionary<string, string> tokenValues)
         {
-            _message.TokenValues = tokenValues;
-            return _message;
+            Message.TokenValues = tokenValues;
+            return Message;
         }
     }
 }

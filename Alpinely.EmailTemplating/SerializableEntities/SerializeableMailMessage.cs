@@ -12,63 +12,62 @@ namespace Alpinely.EmailTemplating.SerializableEntities
     [Serializable]
     public class SerializeableMailMessage
     {
-        private readonly IList<SerializeableAlternateView> AlternateViews = new List<SerializeableAlternateView>();
-        private readonly IList<SerializeableAttachment> Attachments = new List<SerializeableAttachment>();
-        private readonly IList<SerializeableMailAddress> Bcc = new List<SerializeableMailAddress>();
-        private readonly Encoding BodyEncoding;
-        private readonly IList<SerializeableMailAddress> CC = new List<SerializeableMailAddress>();
-        private readonly DeliveryNotificationOptions DeliveryNotificationOptions;
-        private readonly SerializeableCollection Headers;
-        private readonly MailPriority Priority;
-        private readonly Encoding SubjectEncoding;
-        private readonly IList<SerializeableMailAddress> To = new List<SerializeableMailAddress>();
+        private readonly IList<SerializeableAlternateView> _alternateViews = new List<SerializeableAlternateView>();
+        private readonly IList<SerializeableAttachment> _attachments = new List<SerializeableAttachment>();
+        private readonly IList<SerializeableMailAddress> _bcc = new List<SerializeableMailAddress>();
+        private readonly Encoding _bodyEncoding;
+        private readonly IList<SerializeableMailAddress> _cc = new List<SerializeableMailAddress>();
+        private readonly DeliveryNotificationOptions _deliveryNotificationOptions;
+        private readonly SerializeableCollection _headers;
+        private readonly MailPriority _priority;
+        private readonly Encoding _subjectEncoding;
+        private readonly IList<SerializeableMailAddress> _to = new List<SerializeableMailAddress>();
 
         ///
         /// Creates a new serializeable mailmessage based on a MailMessage object
         ///
         ///
-        public SerializeableMailMessage(MailMessage mm)
+        public SerializeableMailMessage(MailMessage mailMessage)
         {
-            IsBodyHtml = mm.IsBodyHtml;
-            Body = mm.Body;
-            Subject = mm.Subject;
-            From = SerializeableMailAddress.GetSerializeableMailAddress(mm.From);
-            To = new List<SerializeableMailAddress>();
-            foreach (MailAddress ma in mm.To)
+            IsBodyHtml = mailMessage.IsBodyHtml;
+            Body = mailMessage.Body;
+            Subject = mailMessage.Subject;
+            From = SerializeableMailAddress.GetSerializeableMailAddress(mailMessage.From);
+            _to = new List<SerializeableMailAddress>();
+            foreach (var mailAddress in mailMessage.To)
             {
-                To.Add(SerializeableMailAddress.GetSerializeableMailAddress(ma));
+                _to.Add(SerializeableMailAddress.GetSerializeableMailAddress(mailAddress));
             }
 
-            CC = new List<SerializeableMailAddress>();
-            foreach (MailAddress ma in mm.CC)
+            _cc = new List<SerializeableMailAddress>();
+            foreach (var mailAddress in mailMessage.CC)
             {
-                CC.Add(SerializeableMailAddress.GetSerializeableMailAddress(ma));
+                _cc.Add(SerializeableMailAddress.GetSerializeableMailAddress(mailAddress));
             }
 
-            Bcc = new List<SerializeableMailAddress>();
-            foreach (MailAddress ma in mm.Bcc)
+            _bcc = new List<SerializeableMailAddress>();
+            foreach (var mailAddress in mailMessage.Bcc)
             {
-                Bcc.Add(SerializeableMailAddress.GetSerializeableMailAddress(ma));
+                _bcc.Add(SerializeableMailAddress.GetSerializeableMailAddress(mailAddress));
             }
 
-            Attachments = new List<SerializeableAttachment>();
-            foreach (Attachment att in mm.Attachments)
+            _attachments = new List<SerializeableAttachment>();
+            foreach (var attachment in mailMessage.Attachments)
             {
-                Attachments.Add(SerializeableAttachment.GetSerializeableAttachment(att));
+                _attachments.Add(SerializeableAttachment.GetSerializeableAttachment(attachment));
             }
 
-            BodyEncoding = mm.BodyEncoding;
+            _bodyEncoding = mailMessage.BodyEncoding;
 
-            DeliveryNotificationOptions = mm.DeliveryNotificationOptions;
-            Headers = SerializeableCollection.GetSerializeableCollection(mm.Headers);
-            Priority = mm.Priority;
-            ReplyTo =
-                mm.ReplyToList.Select(message => SerializeableMailAddress.GetSerializeableMailAddress(message)).ToList();
-            Sender = SerializeableMailAddress.GetSerializeableMailAddress(mm.Sender);
-            SubjectEncoding = mm.SubjectEncoding;
+            _deliveryNotificationOptions = mailMessage.DeliveryNotificationOptions;
+            _headers = SerializeableCollection.GetSerializeableCollection(mailMessage.Headers);
+            _priority = mailMessage.Priority;
+            ReplyTo = mailMessage.ReplyToList.Select(SerializeableMailAddress.GetSerializeableMailAddress).ToList();
+            Sender = SerializeableMailAddress.GetSerializeableMailAddress(mailMessage.Sender);
+            _subjectEncoding = mailMessage.SubjectEncoding;
 
-            foreach (AlternateView av in mm.AlternateViews)
-                AlternateViews.Add(SerializeableAlternateView.GetSerializeableAlternateView(av));
+            foreach (AlternateView av in mailMessage.AlternateViews)
+                _alternateViews.Add(SerializeableAlternateView.GetSerializeableAlternateView(av));
         }
 
         private Boolean IsBodyHtml { get; set; }
@@ -85,56 +84,56 @@ namespace Alpinely.EmailTemplating.SerializableEntities
         ///
         public MailMessage GetMailMessage()
         {
-            var mm = new MailMessage();
+            var mailMessage = new MailMessage();
 
-            mm.IsBodyHtml = IsBodyHtml;
-            mm.Body = Body;
-            mm.Subject = Subject;
+            mailMessage.IsBodyHtml = IsBodyHtml;
+            mailMessage.Body = Body;
+            mailMessage.Subject = Subject;
             if (From != null)
-                mm.From = From.GetMailAddress();
+                mailMessage.From = From.GetMailAddress();
 
-            foreach (SerializeableMailAddress ma in To)
+            foreach (var mailAddress in _to)
             {
-                mm.To.Add(ma.GetMailAddress());
+                mailMessage.To.Add(mailAddress.GetMailAddress());
             }
 
-            foreach (SerializeableMailAddress ma in CC)
+            foreach (var mailAddress in _cc)
             {
-                mm.CC.Add(ma.GetMailAddress());
+                mailMessage.CC.Add(mailAddress.GetMailAddress());
             }
 
-            foreach (SerializeableMailAddress ma in Bcc)
+            foreach (var mailAddress in _bcc)
             {
-                mm.Bcc.Add(ma.GetMailAddress());
+                mailMessage.Bcc.Add(mailAddress.GetMailAddress());
             }
 
-            foreach (SerializeableAttachment att in Attachments)
+            foreach (var attachment in _attachments)
             {
-                mm.Attachments.Add(att.GetAttachment());
+                mailMessage.Attachments.Add(attachment.GetAttachment());
             }
 
-            mm.BodyEncoding = BodyEncoding;
+            mailMessage.BodyEncoding = _bodyEncoding;
 
-            mm.DeliveryNotificationOptions = DeliveryNotificationOptions;
-            Headers.SetColletion(mm.Headers);
-            mm.Priority = Priority;
+            mailMessage.DeliveryNotificationOptions = _deliveryNotificationOptions;
+            _headers.SetColletion(mailMessage.Headers);
+            mailMessage.Priority = _priority;
             if (ReplyTo != null)
             {
                 foreach (SerializeableMailAddress address in ReplyTo)
                 {
-                    mm.ReplyToList.Add(address.GetMailAddress());
+                    mailMessage.ReplyToList.Add(address.GetMailAddress());
                 }
             }
 
             if (Sender != null)
-                mm.Sender = Sender.GetMailAddress();
+                mailMessage.Sender = Sender.GetMailAddress();
 
-            mm.SubjectEncoding = SubjectEncoding;
+            mailMessage.SubjectEncoding = _subjectEncoding;
 
-            foreach (SerializeableAlternateView av in AlternateViews)
-                mm.AlternateViews.Add(av.GetAlternateView());
+            foreach (var alternateView in _alternateViews)
+                mailMessage.AlternateViews.Add(alternateView.GetAlternateView());
 
-            return mm;
+            return mailMessage;
         }
     }
 }

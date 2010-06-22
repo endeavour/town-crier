@@ -11,15 +11,13 @@ namespace Alpinely.EmailTemplating
     /// </summary>
     public class TemplateParser : ITemplateParser
     {
-        protected string _regExString = @"\{\%\=\s*(?<TokenName>\w*)\s*\%\}";
-        protected Regex _regExToken;
+        protected string RegExString = @"\{\%\=\s*(?<TokenName>\w*)\s*\%\}";
+        protected Regex RegExToken;
 
         public TemplateParser()
         {
-            _regExToken = new Regex(_regExString, RegexOptions.IgnoreCase);
+            RegExToken = new Regex(RegExString, RegexOptions.IgnoreCase);
         }
-
-        #region ITemplateParser Members
 
         /// <summary>
         /// Replaces tokens in the template text with the values from the supplied dictionary
@@ -29,27 +27,21 @@ namespace Alpinely.EmailTemplating
         /// <returns>Text with tokens replaced with their corresponding values from the dictionary</returns>
         public string ReplaceTokens(string templateText, IDictionary<string, string> tokenValues)
         {
-            string output = _regExToken.Replace(templateText, (match) =>
+            var output = RegExToken.Replace(templateText, (match) =>
                                                                   {
-                                                                      string tokenName =
-                                                                          match.Groups["TokenName"].Value.ToLower();
+                                                                      var tokenName = match.Groups["TokenName"].Value.ToLower();
                                                                       try
                                                                       {
                                                                           KeyValuePair<string, string> property =
-                                                                              tokenValues.First(
-                                                                                  x => x.Key.ToLower() == tokenName);
+                                                                              tokenValues.First(x => x.Key.ToLower() == tokenName);
                                                                           return property.Value;
                                                                       }
                                                                       catch (Exception)
                                                                       {
-                                                                          throw new ArgumentException(
-                                                                              "No value supplied for token: " +
-                                                                              tokenName);
+                                                                          throw new ArgumentException("No value supplied for token: " + tokenName);
                                                                       }
                                                                   });
             return output;
         }
-
-        #endregion
     }
 }

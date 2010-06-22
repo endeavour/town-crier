@@ -9,13 +9,13 @@ namespace Alpinely.EmailTemplating.SerializableEntities
     [Serializable]
     internal class SerializeableAttachment
     {
-        private SerializeableContentDisposition ContentDisposition;
-        private String ContentId;
-        private Stream ContentStream;
-        private SerializeableContentType ContentType;
-        private String Name;
-        private Encoding NameEncoding;
-        private TransferEncoding TransferEncoding;
+        private SerializeableContentDisposition _contentDisposition;
+        private String _contentId;
+        private Stream _contentStream;
+        private SerializeableContentType _contentType;
+        private String _name;
+        private Encoding _nameEncoding;
+        private TransferEncoding _transferEncoding;
 
         internal static SerializeableAttachment GetSerializeableAttachment(Attachment att)
         {
@@ -23,8 +23,8 @@ namespace Alpinely.EmailTemplating.SerializableEntities
                 return null;
 
             var saa = new SerializeableAttachment();
-            saa.ContentId = att.ContentId;
-            saa.ContentDisposition =
+            saa._contentId = att.ContentId;
+            saa._contentDisposition =
                 SerializeableContentDisposition.GetSerializeableContentDisposition(att.ContentDisposition);
 
             if (att.ContentStream != null)
@@ -32,26 +32,26 @@ namespace Alpinely.EmailTemplating.SerializableEntities
                 var bytes = new byte[att.ContentStream.Length];
                 att.ContentStream.Read(bytes, 0, bytes.Length);
 
-                saa.ContentStream = new MemoryStream(bytes);
+                saa._contentStream = new MemoryStream(bytes);
             }
 
-            saa.ContentType = SerializeableContentType.GetSerializeableContentType(att.ContentType);
-            saa.Name = att.Name;
-            saa.TransferEncoding = att.TransferEncoding;
-            saa.NameEncoding = att.NameEncoding;
+            saa._contentType = SerializeableContentType.GetSerializeableContentType(att.ContentType);
+            saa._name = att.Name;
+            saa._transferEncoding = att.TransferEncoding;
+            saa._nameEncoding = att.NameEncoding;
             return saa;
         }
 
         internal Attachment GetAttachment()
         {
-            var saa = new Attachment(ContentStream, Name);
-            saa.ContentId = ContentId;
-            ContentDisposition.SetContentDisposition(saa.ContentDisposition);
+            var saa = new Attachment(_contentStream, _name);
+            saa.ContentId = _contentId;
+            _contentDisposition.SetContentDisposition(saa.ContentDisposition);
 
-            saa.ContentType = ContentType.GetContentType();
-            saa.Name = Name;
-            saa.TransferEncoding = TransferEncoding;
-            saa.NameEncoding = NameEncoding;
+            saa.ContentType = _contentType.GetContentType();
+            saa.Name = _name;
+            saa.TransferEncoding = _transferEncoding;
+            saa.NameEncoding = _nameEncoding;
             return saa;
         }
     }

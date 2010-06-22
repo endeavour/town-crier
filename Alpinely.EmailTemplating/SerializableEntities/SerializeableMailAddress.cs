@@ -6,26 +6,31 @@ namespace Alpinely.EmailTemplating.SerializableEntities
     [Serializable]
     internal class SerializeableMailAddress
     {
-        private String Address;
-        private String DisplayName;
-        private String Host;
-        private String User;
+        private String _address;
+        private String _displayName;
+        private String _host;
+        private String _user;
+
+        public SerializeableMailAddress(string address, string displayName, string host, string user)
+        {
+            _address = address;
+            _displayName = displayName;
+            _host = host;
+            _user = user;
+        }
 
         internal static SerializeableMailAddress GetSerializeableMailAddress(MailAddress ma)
         {
             if (ma == null)
                 return null;
-            var sma = new SerializeableMailAddress();
-            sma.User = ma.User;
-            sma.Host = ma.Host;
-            sma.Address = ma.Address;
-            sma.DisplayName = ma.DisplayName;
+
+            var sma = new SerializeableMailAddress(ma.Address, ma.DisplayName, ma.Host, ma.User);
             return sma;
         }
 
         internal MailAddress GetMailAddress()
         {
-            return new MailAddress(Address, DisplayName);
+            return new MailAddress(_address, _displayName);
         }
     }
 }

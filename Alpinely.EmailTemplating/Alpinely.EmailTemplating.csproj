@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITemplateParser.cs" />
+    <Compile Include="MailMessageExtensions.cs" />
     <Compile Include="MailMessageWrapper.cs" />
     <Compile Include="MergedEmailFactory.cs" />
     <Compile Include="SerializableEntities\SerializeableMailMessage.cs" />

@@ -9,24 +9,6 @@ namespace Alpinely.EmailTemplating.Tests
     [TestFixture]
     public class IntegrationTests
     {
-        private const string emailOutputDirectory = @"C:\temp\sampleemails";
-        private SmtpClient _smtpClient;
-
-        [TestFixtureSetUp]
-        public void Init()
-        {
-            // Set up an SMTP client to save emails to files rather than actually sending them
-            _smtpClient = new SmtpClient
-                              {
-                                  PickupDirectoryLocation = emailOutputDirectory,
-                                  DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory
-                              };
-
-            Directory.CreateDirectory(_smtpClient.PickupDirectoryLocation);
-
-            Console.WriteLine("Email pick up location: " + _smtpClient.PickupDirectoryLocation);
-        }
-
         [Test]
         public void CanSendHtmlEmail()
         {
@@ -34,7 +16,7 @@ namespace Alpinely.EmailTemplating.Tests
 
             var tokenValues = new Dictionary<string, string>
                                   {
-                                      {"name", "James"},
+                                      {"name", "Joe"},
                                       {"userid", "123"}
                                   };
 
@@ -48,10 +30,21 @@ namespace Alpinely.EmailTemplating.Tests
             message.From = from;
             message.To.Add(to);
 
-            _smtpClient.Send(message);
+            using (var output = new MemoryStream())
+            {
+                message.Save(output);
+                var result = StreamToString(output);
 
-            // Would be nice to read in the output file here and check it is correct but - somewhat annoyingly - there isn't a nice
-            // way to retrieve the filename of the saved file without using reflection: http://www.codeproject.com/KB/IP/smtpclientext.aspx
+                Assert.That(result, Contains.Substring(@"Content-Type: text/html"));
+
+                Assert.That(result, Contains.Substring(@"Dear Joe"));
+
+                // Note that actually the email is encoded with RFC 2045 "Quoted Printable" Encoding, but .NET doesn't ship
+                // with a decoder so we'll add the =3D into our test for simplicity.
+                Assert.That(result, Contains.Substring(@"http://localhost/trackedLink?userId=3D123"));                
+
+                Console.WriteLine(result);
+            }
         }
 
         [Test]
@@ -61,7 +54,7 @@ namespace Alpinely.EmailTemplating.Tests
 
             var tokenValues = new Dictionary<string, string>
                                   {
-                                      {"name", "James"},
+                                      {"name", "Joe"},
                                       {"userid", "123"}
                                   };
 
@@ -72,15 +65,26 @@ namespace Alpinely.EmailTemplating.Tests
                 .WithPlainTextBodyFromFile(@"templates\sample-email.txt")
                 .Create();
 
-            var from = new MailAddress("james@ciseware.com", "Automated Emailer");
-            var to = new MailAddress("james@ciseware.com", "Joe Bloggs");
+            var from = new MailAddress("sender@test.com", "Automated Emailer");
+            var to = new MailAddress("recipient@test.com", "Joe Bloggs");
             message.From = from;
             message.To.Add(to);
 
-            _smtpClient.Send(message);
+            using (var output = new MemoryStream())
+            {
+                message.Save(output);
+                var result = StreamToString(output);
 
-            // Would be nice to read in the output file here and check it is correct but - somewhat annoyingly - there isn't a nice
-            // way to retrieve the filename of the saved file without using reflection: http://www.codeproject.com/KB/IP/smtpclientext.aspx
+                Assert.That(result, Contains.Substring(@"Content-Type: multipart/alternative"));
+
+                Assert.That(result, Contains.Substring(@"Dear Joe"));
+
+                // Note that actually the email is encoded with RFC 2045 "Quoted Printable" Encoding, but .NET doesn't ship
+                // with a decoder so we'll add the =3D into our test for simplicity.
+                Assert.That(result, Contains.Substring(@"http://localhost/trackedLink?userId=3D123"));
+
+                Console.WriteLine(result);
+            }
         }
 
         [Test]
@@ -90,7 +94,7 @@ namespace Alpinely.EmailTemplating.Tests
 
             var tokenValues = new Dictionary<string, string>
                                   {
-                                      {"name", "James"},
+                                      {"name", "Joe"},
                                       {"userid", "123"}
                                   };
 
@@ -104,10 +108,30 @@ namespace Alpinely.EmailTemplating.Tests
             message.From = from;
             message.To.Add(to);
 
-            _smtpClient.Send(message);
+            using (var output = new MemoryStream())
+            {
+                message.Save(output);
+                var result = StreamToString(output);
 
-            // Would be nice to read in the output file here and check it is correct but - somewhat annoyingly - there isn't a nice
-            // way to retrieve the filename of the saved file without using reflection: http://www.codeproject.com/KB/IP/smtpclientext.aspx
+                Assert.That(result, Contains.Substring(@"Content-Type: text/plain"));
+
+                Assert.That(result, Contains.Substring(@"Dear Joe"));
+
+                // Note that actually the email is encoded with RFC 2045 "Quoted Printable" Encoding, but .NET doesn't ship
+                // with a decoder so we'll add the =3D into our test for simplicity.
+                Assert.That(result, Contains.Substring(@"http://localhost/trackedLink?userId=3D123"));
+
+                Console.WriteLine(result);
+            }
+        }
+
+        private static string StreamToString(Stream stream)
+        {
+            stream.Position = 0;
+            using (var sr = new StreamReader(stream))
+            {
+                return sr.ReadToEnd();
+            }
         }
     }
 }

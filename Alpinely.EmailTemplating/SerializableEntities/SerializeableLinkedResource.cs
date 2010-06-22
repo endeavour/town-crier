@@ -8,11 +8,11 @@ namespace Alpinely.EmailTemplating.SerializableEntities
     [Serializable]
     internal class SerializeableLinkedResource
     {
-        private String ContentId;
-        private Uri ContentLink;
-        private Stream ContentStream;
-        private SerializeableContentType ContentType;
-        private TransferEncoding TransferEncoding;
+        private String _contentId;
+        private Uri _contentLink;
+        private Stream _contentStream;
+        private SerializeableContentType _contentType;
+        private TransferEncoding _transferEncoding;
 
         internal static SerializeableLinkedResource GetSerializeableLinkedResource(LinkedResource lr)
         {
@@ -20,30 +20,30 @@ namespace Alpinely.EmailTemplating.SerializableEntities
                 return null;
 
             var slr = new SerializeableLinkedResource();
-            slr.ContentId = lr.ContentId;
-            slr.ContentLink = lr.ContentLink;
+            slr._contentId = lr.ContentId;
+            slr._contentLink = lr.ContentLink;
 
             if (lr.ContentStream != null)
             {
                 var bytes = new byte[lr.ContentStream.Length];
                 lr.ContentStream.Read(bytes, 0, bytes.Length);
-                slr.ContentStream = new MemoryStream(bytes);
+                slr._contentStream = new MemoryStream(bytes);
             }
 
-            slr.ContentType = SerializeableContentType.GetSerializeableContentType(lr.ContentType);
-            slr.TransferEncoding = lr.TransferEncoding;
+            slr._contentType = SerializeableContentType.GetSerializeableContentType(lr.ContentType);
+            slr._transferEncoding = lr.TransferEncoding;
 
             return slr;
         }
 
         internal LinkedResource GetLinkedResource()
         {
-            var slr = new LinkedResource(ContentStream);
-            slr.ContentId = ContentId;
-            slr.ContentLink = ContentLink;
+            var slr = new LinkedResource(_contentStream);
+            slr.ContentId = _contentId;
+            slr.ContentLink = _contentLink;
 
-            slr.ContentType = ContentType.GetContentType();
-            slr.TransferEncoding = TransferEncoding;
+            slr.ContentType = _contentType.GetContentType();
+            slr.TransferEncoding = _transferEncoding;
 
             return slr;
         }
