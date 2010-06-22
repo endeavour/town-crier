@@ -69,16 +69,19 @@ namespace Alpinely.EmailTemplating
             if (HtmlBody != null && PlainTextBody != null)
             {
                 SetBodyFromPlainText();
-                var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null,
-                                                                                            MediaTypeNames.Text.Html);
+                var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null, MediaTypeNames.Text.Html);
                 ContainedMailMessage.AlternateViews.Add(htmlAlternative);
             }
             else
             {
                 if (HtmlBody != null)
+                {
                     SetBodyFromHtmlText();
+                }
                 else if (PlainTextBody != null)
+                {
                     SetBodyFromPlainText();
+                }
             }
 
             return ContainedMailMessage;
