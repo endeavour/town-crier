@@ -5,6 +5,10 @@ using System.Net.Mime;
 
 namespace Alpinely.EmailTemplating.SerializableEntities
 {
+    /// <summary>
+    /// Serialisation of mail message
+    /// Adapted from code here: http://meandaspnet.blogspot.com/
+    /// </summary>
     [Serializable]
     internal class SerializeableLinkedResource
     {

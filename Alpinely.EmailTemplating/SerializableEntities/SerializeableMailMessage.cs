@@ -6,9 +6,10 @@ using System.Text;
 
 namespace Alpinely.EmailTemplating.SerializableEntities
 {
-    ///
-    /// Serializeable mailmessage object
-    ///
+    /// <summary>
+    /// Serialisation of mail message
+    /// Adapted from code here: http://meandaspnet.blogspot.com/
+    /// </summary>
     [Serializable]
     public class SerializeableMailMessage
     {
@@ -25,7 +26,6 @@ namespace Alpinely.EmailTemplating.SerializableEntities
 
         ///
         /// Creates a new serializeable mailmessage based on a MailMessage object
-        ///
         ///
         public SerializeableMailMessage(MailMessage mailMessage)
         {
