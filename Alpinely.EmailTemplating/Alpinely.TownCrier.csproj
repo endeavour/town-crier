@@ -53,8 +53,8 @@
     <Compile Include="TemplateParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="COPYING" />
-    <None Include="COPYING.LESSER" />
+    <Content Include="COPYING.txt" />
+    <Content Include="COPYING.LESSER.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENCE.txt" />
