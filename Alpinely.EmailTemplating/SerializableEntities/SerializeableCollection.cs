@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Specialized;
 
-namespace Alpinely.EmailTemplating.SerializableEntities
+namespace Alpinely.TownCrier.SerializableEntities
 {
     /// <summary>
     /// Serialisation of mail message

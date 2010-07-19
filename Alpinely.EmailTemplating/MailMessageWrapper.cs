@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
 
-namespace Alpinely.EmailTemplating
+namespace Alpinely.TownCrier
 {
     public class MailMessageWrapper
     {

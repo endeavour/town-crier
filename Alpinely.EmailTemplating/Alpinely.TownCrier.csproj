@@ -8,8 +8,8 @@
     <ProjectGuid>{B98744F5-26A0-479B-9501-9DD8A2D1E540}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alpinely.EmailTemplating</RootNamespace>
-    <AssemblyName>Alpinely.EmailTemplating</AssemblyName>
+    <RootNamespace>Alpinely.TownCrier</RootNamespace>
+    <AssemblyName>Alpinely.TownCrier</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>

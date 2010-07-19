@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpinely.EmailTemplating", "Alpinely.EmailTemplating\Alpinely.EmailTemplating.csproj", "{B98744F5-26A0-479B-9501-9DD8A2D1E540}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpinely.TownCrier", "Alpinely.EmailTemplating\Alpinely.TownCrier.csproj", "{B98744F5-26A0-479B-9501-9DD8A2D1E540}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpinely.EmailTemplating.Tests", "Alpinely.EmailTemplating.Tests\Alpinely.EmailTemplating.Tests.csproj", "{5CA1C99F-5742-453D-B2AC-5C42C34DE214}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpinely.TownCrier.Tests", "Alpinely.EmailTemplating.Tests\Alpinely.TownCrier.Tests.csproj", "{5CA1C99F-5742-453D-B2AC-5C42C34DE214}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

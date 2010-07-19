@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
-namespace Alpinely.EmailTemplating
+namespace Alpinely.TownCrier
 {
     /// <summary>
     /// Factory class for creating "mail-merged" MailMessage objects

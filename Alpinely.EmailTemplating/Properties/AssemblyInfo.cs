@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Alpinely.EmailTemplating")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("The Town Crier")]
+[assembly: AssemblyDescription("Simple .NET e-mail templating engine")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Alpinely")]
-[assembly: AssemblyProduct("Alpinely.EmailTemplating")]
-[assembly: AssemblyCopyright("Copyright © Alpinely 2010")]
+[assembly: AssemblyProduct("The Town Crier")]
+[assembly: AssemblyCopyright("Copyright © James Freiwirth 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using NUnit.Framework;
 
-namespace Alpinely.EmailTemplating.Tests
+namespace Alpinely.TownCrier.Tests
 {
     [TestFixture]
     public class EmailTests

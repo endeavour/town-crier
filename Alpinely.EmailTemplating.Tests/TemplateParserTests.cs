@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace Alpinely.EmailTemplating.Tests
+namespace Alpinely.TownCrier.Tests
 {
     [TestFixture]
     public class TemplateParserTests

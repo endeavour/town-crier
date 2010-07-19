@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
 
-namespace Alpinely.EmailTemplating.SerializableEntities
+namespace Alpinely.TownCrier.SerializableEntities
 {
     /// <summary>
     /// Serialisation of mail message

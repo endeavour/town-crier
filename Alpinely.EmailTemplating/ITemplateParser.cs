@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Alpinely.EmailTemplating
+namespace Alpinely.TownCrier
 {
     public interface ITemplateParser
     {

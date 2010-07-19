@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 
-namespace Alpinely.EmailTemplating
+namespace Alpinely.TownCrier
 {
     /// <summary>
     /// Allows saving a mail message to a file.    

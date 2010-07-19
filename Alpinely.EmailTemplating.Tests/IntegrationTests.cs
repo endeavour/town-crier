@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
+using Alpinely.TownCrier;
 using NUnit.Framework;
-
-namespace Alpinely.EmailTemplating.Tests
-{
+namespace Alpinely.TownCrier.Tests
+{    
     [TestFixture]
     public class IntegrationTests
     {
