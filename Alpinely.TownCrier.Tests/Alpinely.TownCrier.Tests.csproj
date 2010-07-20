@@ -59,7 +59,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alpinely.EmailTemplating\Alpinely.TownCrier.csproj">
+    <ProjectReference Include="..\Alpinely.TownCrier\Alpinely.TownCrier.csproj">
       <Project>{B98744F5-26A0-479B-9501-9DD8A2D1E540}</Project>
       <Name>Alpinely.TownCrier</Name>
     </ProjectReference>
