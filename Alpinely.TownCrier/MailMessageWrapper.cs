@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
 using System.Net.Mime;
+using MarkdownSharp;
 
 namespace Alpinely.TownCrier
 {
@@ -12,6 +13,7 @@ namespace Alpinely.TownCrier
         protected internal string HtmlBody;
         protected internal bool IsSubjectSet;
         protected internal string PlainTextBody;
+        protected internal string MarkDownTemplate;
         protected internal readonly ITemplateParser TemplateParser;
         protected internal IDictionary<string, string> TokenValues;
 
@@ -54,6 +56,15 @@ namespace Alpinely.TownCrier
             return this;
         }
 
+        public MailMessageWrapper WithMarkdownBody(string markdownTemplate)
+        {
+            if (MarkDownTemplate != null)
+                throw new InvalidOperationException("a markdown body already exists");
+
+            MarkDownTemplate = markdownTemplate;
+            return this;
+        }
+
         public MailMessageWrapper WithHtmlBodyFromFile(string filename)
         {
             return WithHtmlBody(File.ReadAllText(filename));
@@ -66,22 +77,39 @@ namespace Alpinely.TownCrier
 
         public MailMessage Create()
         {
-            if (HtmlBody != null && PlainTextBody != null)
+            if (MarkDownTemplate != null && (HtmlBody != null || PlainTextBody != null))
             {
-                SetBodyFromPlainText();
-                var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null, MediaTypeNames.Text.Html);
-                ContainedMailMessage.AlternateViews.Add(htmlAlternative);
+                throw new InvalidOperationException("Cannot use both markdown and normal text bodies");
+            }
+
+            if (MarkDownTemplate == null)
+            {
+                if (HtmlBody != null && PlainTextBody != null)
+                {
+                    SetBodyFromPlainText();
+                    var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null, MediaTypeNames.Text.Html);
+                    ContainedMailMessage.AlternateViews.Add(htmlAlternative);
+                }
+                else
+                {
+                    if (HtmlBody != null)
+                    {
+                        SetBodyFromHtmlText();
+                    }
+                    else if (PlainTextBody != null)
+                    {
+                        SetBodyFromPlainText();
+                    }
+                }
             }
             else
             {
-                if (HtmlBody != null)
-                {
-                    SetBodyFromHtmlText();
-                }
-                else if (PlainTextBody != null)
-                {
-                    SetBodyFromPlainText();
-                }
+                var mergedMarkdownBody = TemplateParser.ReplaceTokens(MarkDownTemplate, TokenValues);
+                ContainedMailMessage.Body = mergedMarkdownBody;
+                ContainedMailMessage.IsBodyHtml = false;
+                var html = GetHtml(mergedMarkdownBody);
+                var htmlAlternative = AlternateView.CreateAlternateViewFromString(html, null, MediaTypeNames.Text.Html);
+                ContainedMailMessage.AlternateViews.Add(htmlAlternative);
             }
 
             return ContainedMailMessage;
@@ -97,6 +125,22 @@ namespace Alpinely.TownCrier
         {
             ContainedMailMessage.Body = HtmlBody;
             ContainedMailMessage.IsBodyHtml = true;
+        }
+
+        protected string GetHtml(string template)
+        {
+            var boilerPlate = @"<html><head><title></title></head><body>{0}</body></html>";
+
+            var markdownSharp = new Markdown(
+                new MarkdownOptions
+                {
+                    AutoHyperlink = false,
+                    LinkEmails = false,
+                }
+            );
+            var templateHtml = markdownSharp.Transform(template);
+            var html = string.Format(boilerPlate, templateHtml);
+            return html;
         }
     }
 }
