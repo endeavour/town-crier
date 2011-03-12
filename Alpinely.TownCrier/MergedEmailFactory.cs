@@ -9,6 +9,10 @@ namespace Alpinely.TownCrier
     {
         protected MailMessageWrapper Message;
 
+        public MergedEmailFactory() : this(new TemplateParser())
+        {
+        }
+
         public MergedEmailFactory(ITemplateParser templateParser)
         {
             Message = new MailMessageWrapper(templateParser);
