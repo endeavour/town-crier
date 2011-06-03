@@ -1,0 +1,4 @@
+﻿Dear {%= name %},
+Thanks for signing up to *our* email list. Please visit this url: http://localhost/trackedLink?userId={%= userid %}
+Kind regards,
+Sample Company.
