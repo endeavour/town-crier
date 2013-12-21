@@ -1,4 +1,4 @@
-Town Crier v1.0
+Town Crier v1.1
 Copyright (c) 2010 James Freiwirth
 Released under the Lesser GNU Public Licence v3.
 ----------
@@ -9,3 +9,8 @@ A basic tutorial can be found on my blog:
 http://thecodedecanter.wordpress.com/2010/07/19/town-crier-an-open-source-e-mail-templating-engine-for-net/
 
 Enjoy!
+
+Release History
+----------
+1.0 - Initial release
+1.1 - Added markdown support (thanks to friism for code contribution!)

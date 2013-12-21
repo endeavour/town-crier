@@ -54,6 +54,16 @@ namespace Alpinely.TownCrier
             return this;
         }
 
+        public MailMessageWrapper WithMarkdownBody(string bodyTemplate)
+        {
+            return WithPlainTextBody(bodyTemplate).WithHtmlBody(MarkdownHtmlGenerator.MarkdownToHtml(bodyTemplate));
+        }
+
+        public MailMessageWrapper WithMarkdownBodyFromFile(string filename)
+        {
+            return WithMarkdownBody(File.ReadAllText(filename));
+        }
+
         public MailMessageWrapper WithHtmlBodyFromFile(string filename)
         {
             return WithHtmlBody(File.ReadAllText(filename));
@@ -66,23 +76,23 @@ namespace Alpinely.TownCrier
 
         public MailMessage Create()
         {
-            if (HtmlBody != null && PlainTextBody != null)
-            {
-                SetBodyFromPlainText();
-                var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null, MediaTypeNames.Text.Html);
-                ContainedMailMessage.AlternateViews.Add(htmlAlternative);
-            }
-            else
-            {
-                if (HtmlBody != null)
-                {
-                    SetBodyFromHtmlText();
-                }
-                else if (PlainTextBody != null)
+                if (HtmlBody != null && PlainTextBody != null)
                 {
                     SetBodyFromPlainText();
+                    var htmlAlternative = AlternateView.CreateAlternateViewFromString(HtmlBody, null, MediaTypeNames.Text.Html);
+                    ContainedMailMessage.AlternateViews.Add(htmlAlternative);
                 }
-            }
+                else
+                {
+                    if (HtmlBody != null)
+                    {
+                        SetBodyFromHtmlText();
+                    }
+                    else if (PlainTextBody != null)
+                    {
+                        SetBodyFromPlainText();
+                    }
+                }
 
             return ContainedMailMessage;
         }
@@ -98,5 +108,6 @@ namespace Alpinely.TownCrier
             ContainedMailMessage.Body = HtmlBody;
             ContainedMailMessage.IsBodyHtml = true;
         }
-    }
+
+      }
 }
