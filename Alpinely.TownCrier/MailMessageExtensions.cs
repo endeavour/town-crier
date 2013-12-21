@@ -33,12 +33,18 @@ namespace Alpinely.TownCrier
                 // Get reflection info for Send() method on MailMessage
                 MethodInfo sendMethod = typeof(MailMessage).GetMethod("Send", BindingFlags.Instance | BindingFlags.NonPublic);
 
+                // .NET 4.5 has an additional parameter
+                var methodParams =
+                sendMethod.GetParameters().Length == 2
+                    ? new[] {mailWriter, true}
+                    : new[] {mailWriter, true, true};
+                
                 // Call method passing in MailWriter
                 sendMethod.Invoke(
                     message,
                     BindingFlags.Instance | BindingFlags.NonPublic,
                     null,
-                    new[] { mailWriter, true },
+                    new[] { mailWriter, true, true },
                     null);
             }
         }
